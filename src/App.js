@@ -166,7 +166,7 @@ const FYPManagementSystem = () => {
         setCurrentView={setCurrentView}
         handleLogout={handleLogout}
       />
-      <div className={`${sidebarOpen ? 'lg:ml-64' : 'lg:ml-20'} mt-16 md:mt-20 p-3 md:p-6 transition-all duration-300`}>
+      <div className={`${sidebarOpen ? 'ml-64' : 'ml-20'} mt-20 p-6 transition-all duration-300`}>
         {currentView === 'dashboard' && <StudentDashboard projects={projects} tasks={tasks} documents={documents} darkMode={darkMode} />}
         {currentView === 'project' && <StudentDashboard projects={projects} tasks={tasks} documents={documents} darkMode={darkMode} />}
         {currentView === 'documents' && <DocumentsView documents={documents} darkMode={darkMode} />}

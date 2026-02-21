@@ -68,8 +68,7 @@ const DocumentsView = ({ documents, darkMode }) => {
       )}
 
       <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl shadow-sm border overflow-hidden`}>
-        <div className="overflow-x-auto">
-          {filteredDocuments.length > 0 ? (
+        {filteredDocuments.length > 0 ? (
           <table className="w-full">
             <thead className={`${darkMode ? 'bg-gray-900/50' : 'bg-gray-50'} border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
               <tr>
@@ -126,7 +125,6 @@ const DocumentsView = ({ documents, darkMode }) => {
           )}
         </div>
       </div>
-    </div>
   );
 };
 
