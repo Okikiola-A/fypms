@@ -7,12 +7,14 @@ const Sidebar = ({ role, currentView, setCurrentView, sidebarOpen, setSidebarOpe
     { icon: FileText, label: 'My Project', view: 'project' },
     { icon: Upload, label: 'Documents', view: 'documents' },
     { icon: CheckCircle, label: 'Tasks', view: 'tasks' },
+    { icon: Calendar, label: 'Calendar', view: 'calendar' },
     { icon: MessageSquare, label: 'Messages', view: 'messages' },
     { icon: Settings, label: 'Settings', view: 'settings' }
   ] : role === 'supervisor' ? [
     { icon: Home, label: 'Dashboard', view: 'supervisor-dashboard' },
     { icon: Users, label: 'My Students', view: 'students' },
     { icon: FileText, label: 'Submissions', view: 'submissions' },
+    { icon: Calendar, label: 'Calendar', view: 'supervisor-calendar' },
     { icon: MessageSquare, label: 'Messages', view: 'supervisor-messages' },
     { icon: Award, label: 'Grading', view: 'grading' }
   ] : [

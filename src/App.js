@@ -12,6 +12,7 @@ import SupervisorDashboard from './components/supervisor/SupervisorDashboard';
 import AdminDashboard from './components/admin/AdminDashboard';
 import SettingsView from './components/shared/SettingsView';
 import ProfileSettings from './components/shared/ProfileSettings';
+import CalendarView from './components/shared/CalendarView';
 
 const FYPManagementSystem = () => {
   // State declarations
@@ -69,9 +70,11 @@ const FYPManagementSystem = () => {
       ]);
 
       setMessages([
-        { id: 1, sender: 'Dr. Sarah Johnson', message: 'Hi John, I reviewed your latest submission. Great work on the literature review!', time: '10:30 AM', isSupervisor: true },
-        { id: 2, sender: 'You', message: 'Thank you, Dr. Johnson! I appreciate your feedback.', time: '10:45 AM', isSupervisor: false },
-        { id: 3, sender: 'Dr. Sarah Johnson', message: 'For the next chapter, make sure to include more recent references from 2024-2025.', time: '11:00 AM', isSupervisor: true }
+        { id: 1, sender: 'Dr. Sarah Johnson', message: 'Hi John, I reviewed your latest submission. Great work on the literature review!', time: '10:30 AM', isSupervisor: true, read: true, date: 'Yesterday', reactions: [] },
+        { id: 2, sender: 'You', message: 'Thank you, Dr. Johnson! I appreciate your feedback.', time: '10:45 AM', isSupervisor: false, read: true, date: 'Yesterday', reactions: [] },
+        { id: 3, sender: 'Dr. Sarah Johnson', message: 'For the next chapter, make sure to include more recent references from 2024-2025.', time: '11:00 AM', isSupervisor: true, read: true, date: 'Yesterday', reactions: [] },
+        { id: 4, sender: 'You', message: 'Understood! I will update the references section and resubmit by end of week.', time: '9:15 AM', isSupervisor: false, read: true, date: 'Today', reactions: [] },
+        { id: 5, sender: 'Dr. Sarah Johnson', message: 'Please review the latest feedback on your methodology chapter when you get a chance.', time: '9:45 AM', isSupervisor: true, read: false, date: 'Today', reactions: [] },
       ]);
     } else if (currentUser.role === 'supervisor') {
       setProjects([
@@ -172,15 +175,17 @@ const FYPManagementSystem = () => {
         {currentView === 'documents' && <DocumentsView documents={documents} darkMode={darkMode} />}
         {currentView === 'tasks' && <TasksView tasks={tasks} darkMode={darkMode} />}
         {currentView === 'messages' && <MessagesView darkMode={darkMode} selectedChat={selectedChat} setSelectedChat={setSelectedChat} messages={messages} setMessages={setMessages} />}
+        {currentView === 'calendar' && <CalendarView role="student" tasks={tasks} documents={documents} projects={projects} darkMode={darkMode} />}
         {currentView === 'supervisor-dashboard' && <SupervisorDashboard projects={projects} darkMode={darkMode} />}
         {currentView === 'students' && <SupervisorDashboard projects={projects} darkMode={darkMode} />}
         {currentView === 'submissions' && <DocumentsView documents={documents} darkMode={darkMode} />}
         {currentView === 'supervisor-messages' && <MessagesView darkMode={darkMode} selectedChat={selectedChat} setSelectedChat={setSelectedChat} messages={messages} setMessages={setMessages} />}
+        {currentView === 'supervisor-calendar' && <CalendarView role="supervisor" tasks={tasks} documents={documents} projects={projects} darkMode={darkMode} />}
         {currentView === 'grading' && <SettingsView darkMode={darkMode} />}
         {currentView === 'admin-dashboard' && <AdminDashboard projects={projects} darkMode={darkMode} />}
         {currentView === 'all-projects' && <AdminDashboard projects={projects} darkMode={darkMode} />}
         {currentView === 'users' && <SettingsView darkMode={darkMode} />}
-        {currentView === 'timeline' && <SettingsView darkMode={darkMode} />}
+        {currentView === 'timeline' && <CalendarView role="admin" tasks={tasks} documents={documents} projects={projects} darkMode={darkMode} />}
         {currentView === 'settings' && <ProfileSettings currentUser={currentUser} darkMode={darkMode} setDarkMode={setDarkMode} />}
         {currentView === 'system-settings' && <SettingsView darkMode={darkMode} />}
       </div>
