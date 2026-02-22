@@ -16,22 +16,27 @@ const MessageInput = ({ onSend, darkMode }) => {
   const fileInputRef = useRef(null);
   const textareaRef = useRef(null);
 
-  // Auto-resize textarea height as content grows
+  // Auto-resize as user types
   useEffect(() => {
     const ta = textareaRef.current;
     if (!ta) return;
-    ta.style.height = '42px';
-    ta.style.height = Math.min(ta.scrollHeight, 160) + 'px';
+    ta.style.height = '0';
+    ta.style.height = Math.min(Math.max(ta.scrollHeight, 42), 160) + 'px';
   }, [localMessage]);
+
+  const resetHeight = () => {
+    const ta = textareaRef.current;
+    if (ta) ta.style.height = '42px';
+  };
 
   const handleSend = () => {
     if (localMessage.trim() || attachedFile) {
       onSend(localMessage.trim(), attachedFile);
+      // Reset height synchronously before React re-renders
+      resetHeight();
       setLocalMessage('');
       setAttachedFile(null);
       setShowEmojiPicker(false);
-      // Reset height
-      if (textareaRef.current) textareaRef.current.style.height = '42px';
     }
   };
 
@@ -170,12 +175,12 @@ const MessageInput = ({ onSend, darkMode }) => {
             onKeyDown={handleKeyDown}
             placeholder="Type your message…"
             rows={1}
-            className={`w-full px-4 py-2.5 ${nearLimit ? 'pb-6' : ''} rounded-xl border resize-none overflow-y-auto transition-all focus:ring-2 focus:ring-indigo-500 focus:border-transparent leading-relaxed scrollbar-hide ${
+            className={`w-full px-4 py-2.5 ${nearLimit ? 'pb-6' : ''} rounded-xl border resize-none overflow-y-auto focus:ring-2 focus:ring-indigo-500 focus:border-transparent leading-relaxed scrollbar-hide ${
               darkMode
                 ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
                 : 'bg-gray-50 border-gray-200 text-gray-800 placeholder-gray-400'
             }`}
-            style={{ minHeight: '42px', maxHeight: '160px' }}
+            style={{ maxHeight: '160px' }}
             autoComplete="off"
           />
           {/* Counter sits inside, below text, only appears near limit */}
