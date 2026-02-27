@@ -9,7 +9,11 @@ import DocumentsView from './components/student/DocumentsView';
 import TasksView from './components/student/TasksView';
 import MessagesView from './components/messaging/MessagesView';
 import SupervisorDashboard from './components/supervisor/SupervisorDashboard';
+import SubmissionsView from './components/supervisor/SubmissionsView';
+import GradingView from './components/supervisor/GradingView';
 import AdminDashboard from './components/admin/AdminDashboard';
+import UsersView from './components/admin/UsersView';
+import SystemSettingsView from './components/admin/SystemSettingsView';
 import SettingsView from './components/shared/SettingsView';
 import ProfileSettings from './components/shared/ProfileSettings';
 import CalendarView from './components/shared/CalendarView';
@@ -178,16 +182,16 @@ const FYPManagementSystem = () => {
         {currentView === 'calendar' && <CalendarView role="student" tasks={tasks} documents={documents} projects={projects} darkMode={darkMode} />}
         {currentView === 'supervisor-dashboard' && <SupervisorDashboard projects={projects} darkMode={darkMode} />}
         {currentView === 'students' && <SupervisorDashboard projects={projects} darkMode={darkMode} />}
-        {currentView === 'submissions' && <DocumentsView documents={documents} darkMode={darkMode} />}
+        {currentView === 'submissions' && <SubmissionsView darkMode={darkMode} />}
         {currentView === 'supervisor-messages' && <MessagesView darkMode={darkMode} selectedChat={selectedChat} setSelectedChat={setSelectedChat} messages={messages} setMessages={setMessages} />}
         {currentView === 'supervisor-calendar' && <CalendarView role="supervisor" tasks={tasks} documents={documents} projects={projects} darkMode={darkMode} />}
-        {currentView === 'grading' && <SettingsView darkMode={darkMode} />}
+        {currentView === 'grading' && <GradingView darkMode={darkMode} />}
         {currentView === 'admin-dashboard' && <AdminDashboard projects={projects} darkMode={darkMode} />}
         {currentView === 'all-projects' && <AdminDashboard projects={projects} darkMode={darkMode} />}
-        {currentView === 'users' && <SettingsView darkMode={darkMode} />}
+        {currentView === 'users' && <UsersView darkMode={darkMode} />}
         {currentView === 'timeline' && <CalendarView role="admin" tasks={tasks} documents={documents} projects={projects} darkMode={darkMode} />}
         {currentView === 'settings' && <ProfileSettings currentUser={currentUser} darkMode={darkMode} setDarkMode={setDarkMode} />}
-        {currentView === 'system-settings' && <SettingsView darkMode={darkMode} />}
+        {currentView === 'system-settings' && <SystemSettingsView darkMode={darkMode} />}
       </div>
     </div>
   );
